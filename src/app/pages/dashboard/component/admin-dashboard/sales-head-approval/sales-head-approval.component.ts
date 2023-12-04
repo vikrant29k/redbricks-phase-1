@@ -78,10 +78,12 @@ System_value:any
     showConfirmButton: true,
     confirmButtonText: 'Confirm',
     confirmButtonColor: '#C3343A',
-    input: 'text',
-    inputAttributes:{
-      required:'true'
-    } ,
+    input: 'select',
+    inputOptions: {
+      'option1': 'Option 1',
+      'option2': 'Option 2',
+      'option3': 'Option 3',
+    },
     inputLabel: 'Note',
     showCancelButton: true,
     cancelButtonColor: '#7D7E80',

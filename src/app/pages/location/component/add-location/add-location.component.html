@@ -66,6 +66,18 @@
       />
       </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Bike Parking Charges</mat-label>
+        <input
+        type="number"
+        min="0"
+        oninput="this.value = Math.round(Math.abs(this.value))"
+        matInput
+        formControlName="bikeParkCharge"
+      />
+      </mat-form-field>
+      </section>
+      <section>
       <mat-form-field appearance="outline" *ngIf="editMode">
         <mat-label>Selected workstation number</mat-label>
         <input
@@ -76,6 +88,11 @@
           formControlName="selectedNoOfSeats"
         />
       </mat-form-field>
+      <mat-form-field appearance="outline" >
+        <mat-label>Add percentage for rent and cam</mat-label>
+        <input type="number" matInput formControlName="percentageforRentCam" />
+      </mat-form-field>
+      </section>
       <!-- Car Rent add -->
       <!-- <mat-form-field appearance="outline">
         <mat-label>Car Parking Charges</mat-label>
@@ -98,7 +115,7 @@
         formControlName="rackRate"
       />
       </mat-form-field> -->
-    </section>
+    <!-- </section> -->
     <section>
       <!-- <mat-form-field appearance="outline" *ngIf="editMode">
         <mat-label>Total Sales Price</mat-label>
@@ -124,44 +141,45 @@
       <!-- </section> -->
       <!-- Add Year Rent cam  Button -->
 
+
       <section>
-        <div class="form-field " >
-          <button type="button" mat-raised-button (click)="onAddFromGroup()" color="primary">
+        <!-- <div class="form-field " > -->
+          <!-- <button type="button" mat-raised-button (click)="onAddFromGroup()" color="primary">
             <div class="button_content">
               <mat-icon fontSet="material-icons-round">calendar_today</mat-icon>
               <p>Add Rent & Cam</p>
             </div>
-          </button>
-          <section style="display: flex; flex-wrap: wrap; gap: 20px;" >
+          </button> -->
+          <section style="display: flex;gap: 20px;" >
           <ng-container formArrayName="rentSheet" *ngFor="let control of rentSheet; let i = index" >
             <ng-container [formGroup]="transformToFormGroup(control)">
-            <mat-form-field appearance="outline" class="center_align" >
-              <mat-label>Year {{ i + 1 }}</mat-label>
-              <input matInput [matDatepicker]="dp" placeholder="Select Year" formControlName="year" />
-              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-              <mat-datepicker #dp
-                              startView="multi-year"
-                              (yearSelected)="chosenYearHandler($event, dp,i)"
-                             
-                              panelClass="example-month-picker">
-              </mat-datepicker>
-            </mat-form-field>
+              <mat-form-field appearance="outline" class="center_align">
+                <mat-label>Date </mat-label>
+                <input matInput [matDatepicker]="dp" placeholder="Select Date" formControlName="year" />
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+                </mat-form-field>
             
-            <mat-form-field appearance="outline" class="center_align">
-              <mat-label>Rent {{ i + 1 }}</mat-label>
+            <mat-form-field appearance="outline"  class="center_align">
+              <mat-label>Rent </mat-label>
               <input type="number" matInput formControlName="rent" />
               <!-- <mat-icon matSuffix (click)="onRemove('rentSheet', i)">delete</mat-icon> -->
             </mat-form-field>
-            <mat-form-field appearance="outline" class="center_align">
-              <mat-label>Cam {{ i + 1  }}</mat-label>
+            <mat-form-field appearance="outline"  class="center_align" >
+              <mat-label>Cam </mat-label>
               <input type="number" matInput formControlName="cam" />
-              <mat-icon matSuffix (click)="onRemove('rentSheet', i)">delete</mat-icon>
+              <!-- <mat-icon matSuffix (click)="onRemove('rentSheet', i)">delete</mat-icon> -->
             </mat-form-field>
+
+      
+
           </ng-container>
           </ng-container>
         </section>
-        </div>
-      </section>
+      
+        <!-- </div> -->
+      </section> 
+      
       <div>
         <div class="flexbox">
           <ng-container *ngFor="let file of allData?.centerImage;let i = index">

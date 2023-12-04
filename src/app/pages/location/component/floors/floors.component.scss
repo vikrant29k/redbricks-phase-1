@@ -61,7 +61,7 @@
             border-radius: 10px;
             padding: 3px;
             @include for-mobile() {
-              border-radius: 12px;
+              border-radius: 16px;
               padding: 1px;
             }
           }

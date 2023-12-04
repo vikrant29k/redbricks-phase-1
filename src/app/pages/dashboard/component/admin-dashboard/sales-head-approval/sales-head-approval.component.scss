@@ -17,12 +17,26 @@
   display: flex;
   gap: 1rem;
   width:100%;
+  @include for-mobile(){
+    flex-direction: column;
+  }
   .left-content{
     width: 60%;
+    @include for-mobile(){
+      width:100%;
+    }
     .title{
       display: flex;
       justify-content: space-around;
       align-items: center;
+      h2{
+        font-size: 1.8rem; 
+        color:#c3343a;
+        @include for-mobile(){
+          font-size: 1.5rem;
+        }
+      }
+    
     }
     .newSections{
       display: flex;
@@ -35,11 +49,15 @@
         align-items: center;
         @include for-mobile(){
           flex-direction: column;
+          gap:1rem;
         }
         .approval-future-div{
           display: flex;
           align-items: center;
           gap: 2rem;
+          @include for-mobile(){
+            flex-direction: column;
+          }
           section{
             display: flex;
             flex-direction: column;
@@ -51,6 +69,9 @@
             width: 0.12rem;
             max-width: 0.12rem;
             background-color: #c3343a;
+            @include for-mobile(){
+              height:0rem;
+            }
           }
         }
         .mat-form-field{
@@ -63,17 +84,30 @@
     width: 40%;
     padding-inline-start: 5px;
     border-left: 3px dashed #c3343a;
+    @include for-mobile(){
+      width:100%;
+      border-left:0px;
+    }
     .title{
       display: flex;
       justify-content: space-around;
       align-items: center;
+      h2{
+        color:#c3343a;
+      }
     }
     section{
       display: flex;
       justify-content: space-evenly;
+      @include for-mobile(){
+        flex-direction: column;
+      }
       .mat-form-field{
         width: 12rem;
         text-align: center;
+        @include for-mobile(){
+          width:16rem;
+        }
       }
     }
   }
@@ -89,13 +123,14 @@
   gap: 17rem;
   padding:1rem;
   @include for-mobile(){
-    gap:4rem;
+    gap:1rem;
   }
   button{
     width:7rem;
     height: 3rem;
     @include for-mobile(){
       width:7rem;
+      height: 2.5rem;
     }
   }
   }

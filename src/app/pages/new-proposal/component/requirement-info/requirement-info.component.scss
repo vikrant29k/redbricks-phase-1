@@ -57,6 +57,7 @@
     justify-content: flex-start;
     width: inherit;
     padding-block-start: 2rem;
+   
   }
 
   .card {
@@ -74,6 +75,10 @@
     @include for-desktop() {
       font-size: 1rem;
       font-weight: 500;
+    }
+    @include for-mobile(){
+      margin-inline-start: 4rem;
+      margin-top:4rem;
     }
   }
 

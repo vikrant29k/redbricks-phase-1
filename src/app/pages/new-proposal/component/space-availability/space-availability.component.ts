@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProposalService } from 'src/app/service/proposal/proposal.service';
@@ -21,6 +21,7 @@ export class NewProposalSpaceAvailabilityComponent implements OnInit {
   nonStandardRequirement: boolean = false;
   proposalId!: string;
   isServiced: boolean = true;
+  isFitout:boolean=true;
   isAcceptConsolidatedSeats: boolean = true;
   locationId!:string;
   selectFrom: 'left' | 'right' = 'left';
@@ -34,6 +35,7 @@ export class NewProposalSpaceAvailabilityComponent implements OnInit {
   selectedLocation:any;
   selectedCenter:any;
   finalAmount:any;
+  generateLayoutClicked:boolean =false
   // getRackValue:any;
   proposalExtraDetailForm = new FormGroup({
     consolidated: new FormControl(''),
@@ -43,7 +45,9 @@ export class NewProposalSpaceAvailabilityComponent implements OnInit {
     noticePeriod:new FormControl('6',Validators.required),
     NonStandardRequirement: new FormControl(''),
     Serviced: new FormControl('', Validators.required),
+    Fitout:new FormControl('', Validators.required),
     rentCommencmentDate: new FormControl('',Validators.required),
+    brokeragePercent:new FormControl('',Validators.required),
   });
 
   constructor(
@@ -86,7 +90,8 @@ content:any;
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if(result === true){
-        this.setButtonDisable= true
+        this.setButtonDisable= true;
+        this.generateLayoutClicked=true;
       }
     });
 
@@ -115,5 +120,16 @@ content:any;
 
   }
 
+  errorMessage: string = '';
+  validateInput(event: any): void {
+    const inputValue: number = event.target.value;
 
+    if (isNaN(inputValue) || inputValue < 5 || inputValue > 15) {
+      this.errorMessage = 'Please enter a number between 5 and 15';
+    } else {     
+      this.errorMessage = '';
+    }
+  }
+  
 }
+

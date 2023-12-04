@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, PatternValidator, Validators } from "@angular/forms";
 import { AuthenticationService } from "src/app/service/authentication/authentication.service";
 import { BrokerData, BrokerService } from "src/app/service/broker/broker.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -19,7 +19,7 @@ export class BrokerAddBrokerComponent implements OnInit {
         'brokerType': new FormControl(''),
         'brokerCategory': new FormControl(''),
         'SPOCName': new FormControl(''),
-        'SPOCEmail': new FormControl(''),
+        'SPOCEmail': new FormControl('', [Validators.email,  Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')]),
         'SPOCNumber': new FormControl('')
     });
 
@@ -35,6 +35,10 @@ export class BrokerAddBrokerComponent implements OnInit {
         if (this.brokerId) this.getBrokerDataToEdit(this.brokerId);
     }
 
+get spocEmailControl() {
+    return this.brokerForm.get('SPOCEmail');
+  }
+  
     onSubmit = () => {
         if (!this.editMode) {
             this.brokerService.addBroker(this.brokerForm.value as BrokerData).subscribe({

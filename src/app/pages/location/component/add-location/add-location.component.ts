@@ -9,45 +9,18 @@ import { ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { DatePipe } from '@angular/common';
 import { GenerateRackValueComponent } from '../generate-rack-value/generate-rack-value.component';
-import {
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-} from '@angular/material-moment-adapter';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-} from '@angular/material/core';
-import * as _moment from 'moment';
 import { default as _rollupMoment, Moment } from 'moment';
 import { environment } from 'src/environments/environment';
 import { take } from 'rxjs';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'YYYY',
-  },
-  display: {
-    dateInput: 'YYYY',
-    monthYearLabel: 'YYYY',
-    monthYearA11yLabel: 'YYYY',
-  },
-};
-const moment = _rollupMoment || _moment;
 @Component({
   selector: 'app-add-location',
   templateUrl: './add-location.component.html',
   styleUrls: ['./add-location.component.scss'],
-  providers:[ {
-    provide: DateAdapter,
-    useClass: MomentDateAdapter,
-    deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
-  },
-  { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
-]
+
 })
 export class AddLocationComponent implements OnInit {
-  date = new FormControl(moment());
+ 
   myFiles:any [] = [];
   myFileImageLink:any[]=[]
   layoutImage!: File;
@@ -82,6 +55,8 @@ export class AddLocationComponent implements OnInit {
     totalNoOfWorkstation: new FormControl('', Validators.required),
     rentSheet: new FormArray([]),
     carParkCharge: new FormControl(''),
+    bikeParkCharge:new FormControl(''),
+    percentageforRentCam:new FormControl('')
   });
 
 
@@ -116,7 +91,7 @@ export class AddLocationComponent implements OnInit {
   }
   onAddFromGroup() {
     const control = new FormGroup({
-      year: new FormControl('', Validators.required),
+      year: new FormControl(new Date(),Validators.required),
       rent: new FormControl('', Validators.required),
       cam: new FormControl('', Validators.required)
     });
@@ -163,7 +138,7 @@ export class AddLocationComponent implements OnInit {
       this.editMode = true;
       this.getLocationDataToUpdate(this.locationId);
     }
-    if(this.editMode==true){
+    if(this.editMode==false){
       this.onAddFromGroup()
     }
     this.selectSalesHead();
@@ -190,6 +165,8 @@ allData:any
           rentSheet: result.rentSheet,
           carParkCharge: result.carParkCharge,
           rackRate: result.rackRate,
+          percentageforRentCam: result.percentageforRentCam,
+    
         });
         result.rentSheet.forEach((element: any,index: number) => {
           this.onAddFromGroup();
@@ -274,15 +251,17 @@ allData:any
       }
     }
   };
-  chosenYearHandler(normalizedYear: any, dp: any,index:any) {
-    const ctrlValue:any = this.date.value ;
-    ctrlValue.year(normalizedYear.year());
-    this.date.setValue(ctrlValue);
-  // console.log(this.locationForm)
-  this.rentSheet[index].patchValue({year:ctrlValue});
-    dp.close()
-  }
+
+  // chosenYearHandler(normalizedYear: any, dp: any,index:any) {
+  //   const ctrlValue:any = this.date.value ;
+  //   ctrlValue.year(normalizedYear.year());
+  //   this.date.setValue(ctrlValue);
+  // // console.log(this.locationForm)
+  // this.rentSheet[index].patchValue({year:ctrlValue});
+  //   dp.close()
+  // }
   // add new method select image
+  
   getFileDetails (e:any) {
     //console.log (e.target.files);
     let reader = new FileReader();

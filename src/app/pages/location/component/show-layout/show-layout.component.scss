@@ -1,3 +1,13 @@
+@mixin for-desktop {
+  @media (max-width: 1440px) {
+    @content;
+  }
+}
+@mixin for-mobile {
+  @media (max-width: 450px) {
+    @content;
+  }
+}
 .image-container {
   display: block;
   width: 100%;
@@ -5,5 +15,8 @@
   text-align: center;
   img{
     width: inherit;
+  }
+  @include for-mobile(){
+    margin-block: 4rem;
   }
 }
