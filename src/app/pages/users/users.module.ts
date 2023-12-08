@@ -7,13 +7,14 @@ import { AddUsersComponent } from "./component/add-user/add-users.component";
 import { UsersListComponent } from "./component/user-list/users-list.component";
 import { UsersRoutingModule } from "./module/routing/uses-routing.module";
 import { UsersMaterialModule } from "./module/material/users-material.module";
+import { ShowChartComponent } from "./component/show-chart/show-chart.component";
 
 @NgModule({
     declarations: [
       UsersComponent,
       UsersListComponent,
-      AddUsersComponent
-
+      AddUsersComponent,
+      ShowChartComponent
         
     ],
     imports: [

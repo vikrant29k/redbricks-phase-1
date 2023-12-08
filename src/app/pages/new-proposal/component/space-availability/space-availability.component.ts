@@ -124,7 +124,7 @@ content:any;
     const inputValue: number = event.target.value;
 
     if (isNaN(inputValue) || inputValue < 5 || inputValue > 15) {
-      this.errorMessage = 'Please enter a number between 5 and 15';
+      this.errorMessage = 'Please enter a percentage between 5 and 15';
     } else {     
       this.errorMessage = '';
     }

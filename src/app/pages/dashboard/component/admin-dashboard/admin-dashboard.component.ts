@@ -11,7 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { fadeOut, blub } from 'src/assets/animation/template.animation';
 import { DashboardService } from 'src/app/service/dashboard/dashboard.service';
 import { ChangeDetectorRef } from '@angular/core';
-import { ShowChartComponent } from './show-chart/show-chart.component';
+import { ShowChartComponent } from '../../../users/component/show-chart/show-chart.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SalesHeadApprovalComponent } from './sales-head-approval/sales-head-approval.component';
 import { TooltipComponent } from '@angular/material/tooltip';
@@ -27,18 +27,14 @@ import { AuthenticationService } from 'src/app/service/authentication/authentica
     transition('hidden => visible', animate('300ms ease-in')),
     transition('visible => hidden', animate('300ms ease-out')),
   ]),
+
+
   trigger('menuAnimation', [
-    state('hidden', style({
-      right: '-50px',
-      opacity: 0,
-    })),
-    state('visible', style({
-      right: '50px',
-      opacity: 1,
-    })),
+    state('hidden', style({ opacity: 0,  right: '-50px', })),
+    state('visible', style({ opacity: 1,  right: '50px', })),
     transition('hidden => visible', animate('300ms ease-in')),
-    transition('visible => hidden', animate('300ms ease-out'))
-  ])
+    transition('visible => hidden', animate('300ms ease-out')),
+  ]),
 ]
 })
 export class DashboardAdminDashboard implements OnInit {
@@ -81,20 +77,17 @@ export class DashboardAdminDashboard implements OnInit {
   UpdateAmount: any;
   dataSourceConflict: any;
   isHidden: boolean = false;
-  menuItems = [
-    { label: 'Home', link: '/' },
-    { label: 'About', link: '/about' },
-    { label: 'Services', link: '/services' },
-    { label: 'Contact', link: '/contact' },
-  ];
+
+
   menuState = 'hidden';
-state='hidden';
-  toggleMenu() {
-    this.menuState = this.menuState === 'hidden' ? 'visible' : 'hidden';
+toggleMenu() {
+  if (this.menuState === 'hidden') {
+    this.getUserListArray();
   }
-  toggleMenus() {
-    this.state = this.state === 'hidden' ? 'visible' : 'hidden';
-  }
+  this.menuState = this.menuState === 'hidden' ? 'visible' : 'hidden';
+}
+
+
 
   notifications: any;
   deselect:any;
@@ -350,13 +343,26 @@ getUserListArray = ()=>{
     this.userList =res
   })
 }
-openChartDialog(enterAnimationDuration: string, exitAnimationDuration: string,id:any){
-  this.dashboardService.getSelsProposalCount(id).subscribe((res:any)=>{
-  this.dialog.open(ShowChartComponent,{
-     hasBackdrop:false,
-      enterAnimationDuration,
-      exitAnimationDuration,
-      data:res
-  })
-  })
-}}
+// openChartDialog( id: any) {
+//   // Check if the dialog is already open
+//   const isDialogOpen = this.dialog.getDialogById('chartDialog');
+
+//   if (isDialogOpen) {
+//     // If the dialog is open, close it
+//     isDialogOpen.close();
+//   } else {
+//     // If the dialog is not open, open it
+//     this.dashboardService.getSelsProposalCount(id).subscribe((res: any) => {
+//       console.log(res); // Log the data to check if it's correct
+
+//       this.dialog.open(ShowChartComponent, {
+//         id: 'chartDialog', // Set a unique ID for the dialog
+//         hasBackdrop: false,
+       
+//         data: res
+//       });
+//     });
+//   }
+// }
+
+}
