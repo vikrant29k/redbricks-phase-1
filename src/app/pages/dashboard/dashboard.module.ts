@@ -10,7 +10,7 @@ import { DashboardMaterialModule } from "./module/material/dashboard-material.mo
 import { AdminDashboardExpandComponent } from './component/admin-dashboard-expand/admin-dashboard-expand.component';
 import { ShowStatsComponent } from './component/admin-dashboard-expand/show-stats/show-stats.component';
 import { GoogleChartsModule } from 'angular-google-charts';
-import { ShowChartComponent } from './component/admin-dashboard/show-chart/show-chart.component';
+// import { ShowChartComponent } from '../users/component/show-chart/show-chart.component';
 import { SalesHeadApprovalComponent } from './component/admin-dashboard/sales-head-approval/sales-head-approval.component';
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { IndianNumberPipe } from "./component/admin-dashboard/sales-head-approval/india-number.pipe";
@@ -23,7 +23,7 @@ import { IndianNumberPipe } from "./component/admin-dashboard/sales-head-approva
         DashboardAdminDashboard,
         AdminDashboardExpandComponent,
         ShowStatsComponent,
-        ShowChartComponent,
+        // ShowChartComponent,
         SalesHeadApprovalComponent
     ],
     imports: [

@@ -26,6 +26,21 @@
       @include for-mobile() {
       font-size: 0.9rem;
       }
+      
+      .filter {
+        display: flex;
+        flex-direction: row;
+        align-items: center; 
+        
+        .mat-button {
+          margin-right: 10px; 
+        }
+      
+        .mat-form-field {
+          margin-right: 10px; 
+        }
+      }
+
     }
 
     .table-container {

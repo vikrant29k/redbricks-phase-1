@@ -148,7 +148,7 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-          <mat-form-field appearance="fill">
+          <!-- <mat-form-field appearance="fill">
             <mat-label>Brokerage Percentage</mat-label>
             <input
               type="number"
@@ -158,7 +158,7 @@
             <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
           </mat-form-field>
-    
+     -->
         </div>
         <div class="extra-proposal-details__bottom">
           <button
@@ -181,7 +181,7 @@
           >
             Non Serviced
           </button>
-          <button
+          <!-- <button
           type="button"
           mat-raised-button
           [color]="isFitout ? 'primary' : 'accent'"
@@ -200,7 +200,7 @@
           formControlName="Fitout"
         >
           Non Fitout
-        </button>
+        </button> -->
         </div>
       </div>
       <div class="form-action">
@@ -218,7 +218,7 @@
           mat-raised-button
           color="primary"
           (click)="generateProposal()"
-          [disabled]="!generateLayoutClicked || !seatAvailability"
+          [disabled]=" !seatAvailability"
         >
           Generate Proposal
         </button>

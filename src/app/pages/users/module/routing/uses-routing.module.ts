@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AddUsersComponent } from "../../component/add-user/add-users.component";
 import { UsersListComponent } from "../../component/user-list/users-list.component";
 import { UsersComponent } from "../../users.component";
+import { ShowChartComponent } from "../../component/show-chart/show-chart.component";
 const routes: Routes = [
     {
         path: '',
@@ -24,8 +25,11 @@ const routes: Routes = [
             {
                 path: 'user-list',
                 component: UsersListComponent
+            },
+            {
+                path: 'show-details/:id',
+                component: ShowChartComponent
             }
-           
         ]
     }
 ];

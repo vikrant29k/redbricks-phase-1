@@ -164,6 +164,7 @@ allData:any
           perSeatPrice: result.perSeatPrice,
           rentSheet: result.rentSheet,
           carParkCharge: result.carParkCharge,
+          bikeParkCharge:result.bikeParkCharge,
           rackRate: result.rackRate,
           percentageforRentCam: result.percentageforRentCam,
     

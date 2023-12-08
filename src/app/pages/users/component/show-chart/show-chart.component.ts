@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { DashboardService } from './../../../../../service/dashboard/dashboard.service';
+import { DashboardService } from 'src/app/service/dashboard/dashboard.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActivatedRoute, Route } from '@angular/router';
+
 declare var google: any;
 
 @Component({
@@ -16,10 +18,10 @@ export class ShowChartComponent implements OnInit,AfterViewInit {
 
   @ViewChild('pieChart') pieChart!:  | ElementRef;
 
-  constructor(private dashboardService:DashboardService,@Inject(MAT_DIALOG_DATA) public data: any) {
-    if(data){
-      this.dataChart = data
-    }
+  constructor(private dashboardService:DashboardService, private route: ActivatedRoute) {
+   
+
+   
   }
   ngAfterViewInit(): void {
    if(this.dataChart){
@@ -29,18 +31,22 @@ export class ShowChartComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(queryParams => {
+      this.dataChart = JSON.parse(queryParams['chartData']);
 
     google.charts.load('current', { 'packages': ['corechart'] });
 
     google.charts.setOnLoadCallback(() => {
-      this.fetchData();
+     // this.fetchData();
       this.drawChart();
+      this.drawPieChart();
     });
     google.charts.setOnLoadCallback(this.drawChart.bind(this)); // Bind the function to the correct context
+  });
   }
 
   fetchData(){
-    this.dashboardService.getSaleData(this.id).subscribe({
+    this.dashboardService.getSelsProposalCount(this.id).subscribe({
       next:(res:any)=>{
         // console.log(res)
         this.chartdata = res;

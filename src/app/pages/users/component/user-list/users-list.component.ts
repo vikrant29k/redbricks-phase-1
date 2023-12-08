@@ -6,7 +6,9 @@ import { UserService } from 'src/app/service/users/user.service';
 import Swal from 'sweetalert2';
 import { AuthenticationService } from 'src/app/service/authentication/authentication.service';
 import { Router } from "@angular/router";
-
+import { ShowChartComponent } from '../show-chart/show-chart.component';
+import { DashboardService } from 'src/app/service/dashboard/dashboard.service';
+import { MatDialog } from '@angular/material/dialog';
 export interface UserData {
   _id?: any,
   firstName: String,
@@ -64,7 +66,7 @@ export class UsersListComponent implements OnInit, AfterViewInit {
   //   { Sr: 22, firstName: 'Manprit', lastName: 'TIwari', mobile: 9834870884, email: 'manprit@mobicloud.co.in', role: 'Admin'}
   // ];
 
-  displayedColumns: string[] = ['Sr', 'firstName', 'lastName', 'mobile', 'email', 'role', 'edit', 'delete'];
+  displayedColumns: string[] = ['Sr', 'firstName', 'lastName', 'mobile', 'email', 'role','view', 'edit', 'delete'];
   dataSource!: MatTableDataSource<UserData>;
 
   @ViewChild(MatTable) table!: MatTable<UserData>;
@@ -76,7 +78,9 @@ export class UsersListComponent implements OnInit, AfterViewInit {
     private cd: ChangeDetectorRef,
     private userService: UserService,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private dashboardService:DashboardService,
+    private dialog:MatDialog
   ) {
 
   }
@@ -94,6 +98,15 @@ export class UsersListComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  filterByRole(): void {
+    const filteredUsers: UserData[] = this.Users.filter((user: UserData) => user.role === 'sales');
+    this.dataSource = new MatTableDataSource(filteredUsers);
+    this.dataSource.paginator = this.paginator;
+    this.table.renderRows();
+  }
+  
+
   getAllUsers() {
     this.userService.getAllUser().subscribe({
       next: (result: any) => {
@@ -167,4 +180,35 @@ export class UsersListComponent implements OnInit, AfterViewInit {
   //     this.getAllUsers();
   //   });
   // }
+
+  viewSales(id: any) {
+    this.dashboardService.getSelsProposalCount(id).subscribe((res: any) => {
+      console.log(res);
+  
+      // Navigate to the desired route and pass the data as a query parameter
+      this.router.navigate(['/admin', 'users', 'show-details', id], { queryParams: { chartData: JSON.stringify(res) } });
+    });
+  }
+
+  openChartDialog( id: any) {
+ 
+  const isDialogOpen = this.dialog.getDialogById('chartDialog');
+
+  if (isDialogOpen) {
+   
+    isDialogOpen.close();
+  } else {
+   
+    this.dashboardService.getSelsProposalCount(id).subscribe((res: any) => {
+      console.log(res); 
+
+      this.dialog.open(ShowChartComponent, {
+        id: 'chartDialog',
+        hasBackdrop: false,
+       
+        data: res
+      });
+    });
+  }
+}
 }
