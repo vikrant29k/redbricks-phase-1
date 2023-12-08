@@ -166,7 +166,6 @@ allData:any
           carParkCharge: result.carParkCharge,
           bikeParkCharge:result.bikeParkCharge,
           rackRate: result.rackRate,
-          bikeParkCharge:result.bikeParkCharge,
           percentageforRentCam: result.percentageforRentCam,
     
         });
