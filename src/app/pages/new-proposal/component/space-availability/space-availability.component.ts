@@ -45,9 +45,9 @@ export class NewProposalSpaceAvailabilityComponent implements OnInit {
     noticePeriod:new FormControl('6',Validators.required),
     NonStandardRequirement: new FormControl(''),
     Serviced: new FormControl('', Validators.required),
-    Fitout:new FormControl('', Validators.required),
+    // Fitout:new FormControl('', Validators.required),
     rentCommencmentDate: new FormControl('',Validators.required),
-    brokeragePercent:new FormControl('',Validators.required),
+    // brokeragePercent:new FormControl('',Validators.required),
   });
 
   constructor(

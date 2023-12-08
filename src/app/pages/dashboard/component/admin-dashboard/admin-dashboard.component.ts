@@ -255,13 +255,13 @@ countOfRecentProposal!:number
       cancelButtonColor: '#7D7E80',
     }).then((confirmation) => {
       if (confirmation.isConfirmed) {
-        // this.proposalService.lockProposal(id, { lockProposal:true })
-        //   .subscribe((res:any) => {
-        //     console.log(res,"Locked Proposal")
+        this.proposalService.lockProposal(id, { lockProposal:true })
+          .subscribe((res:any) => {
+            console.log(res,"Locked Proposal")
 
-                 this.route.navigate(['/admin','location','lock-layout',id])
+                //  this.route.navigate(['/admin','location','lock-layout',id])
 
-          // });
+          });
           this.deleteRow(id)
       }
     });
@@ -327,17 +327,19 @@ countOfRecentProposal!:number
 
 salesHead(id:any){
   if (this.title === 'sales head'){
-    this.dialog.open(SalesHeadApprovalComponent,{
+    const dialogRef = this.dialog.open(SalesHeadApprovalComponent,{
       width: '1200px',
       height:'615px',
       panelClass:'salesHead',
       data:{id:id}
 
   })
-
-    this.dialog.afterAllClosed.subscribe(()=>{
-      this.deleteRow(id)
+    dialogRef.afterClosed().subscribe(res=>{
+      this.getDashoboardData()
     })
+    // this.dialog.afterAllClosed.subscribe(()=>{
+    //   this.deleteRow(id)
+    // })
   }
 
 }

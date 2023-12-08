@@ -165,6 +165,7 @@ allData:any
           rentSheet: result.rentSheet,
           carParkCharge: result.carParkCharge,
           rackRate: result.rackRate,
+          bikeParkCharge:result.bikeParkCharge,
           percentageforRentCam: result.percentageforRentCam,
     
         });
@@ -200,6 +201,7 @@ allData:any
     let val =  this.locationForm.get('rentSheet')?.value;
     // console.log(val,"asdasd");
     let total = val[0].rent + val[0].cam
+    console.log(total,"RENTCANTOTAL")
      this.locationForm.patchValue({
        rentAndCamTotal:total
      });

@@ -1,12 +1,4 @@
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute, Router } from "@angular/router";
-// import { LocationService } from 'src/app/service/location/location.service';
-import { Component, OnInit, Inject } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { PDFProgressData } from "ng2-pdf-viewer";
-import { ProposalService } from "src/app/service/proposal/proposal.service";
-import { environment } from "src/environments/environment";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocationService } from "src/app/service/location/location.service";
 @Component({
